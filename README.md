@@ -5,10 +5,10 @@ My personal archive and roadmap for learning C++ programming basics, syntax, and
 ## 📁 Repository Structure
 
 ### 1. ⚔️ Text-Based RPG Combat System
-Located in: `boss_battle_remake.cpp`
+Located in: `boss_fight.cpp`
 * **Description:** A lightweight, modular console-based battle simulator. Demonstrates foundational game development concepts, structured programming, and efficient memory management.
 * **Key Features:** Pass-by-reference (`int &`), DRY principle with reusable functions (`healPlayer`, `dealDamage`), and turn-based mechanics.
-* **How to Play:** Compile via `g++ boss_battle_remake.cpp -o game` and run the executable.
+* **How to Play:** Compile via `g++ boss_fight.cpp -o game` and run the executable.
 
 ---
 
