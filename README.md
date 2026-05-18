@@ -1,20 +1,18 @@
-# Learning C++ 🚀
+# My C++ Development Portfolio
 
-My personal archive and roadmap for learning C++ programming basics, syntax, and principles.
+Welcome to my repository! This is a curated collection of my independent C++ projects, focusing on algorithms, custom cryptography, and core game development mechanics.
 
 ## 📁 Repository Structure
 
-### 1. ⚔️ Text-Based RPG Combat System
-Located in: `boss_fight.cpp`
-* **Description:** A lightweight, modular console-based battle simulator. Demonstrates foundational game development concepts, structured programming, and efficient memory management.
-* **Key Features:** Pass-by-reference (`int &`), DRY principle with reusable functions (`healPlayer`, `dealDamage`), and turn-based mechanics.
-* **How to Play:** Compile via `g++ boss_fight.cpp -o game` and run the executable.
+### 1. [🎮 Boss Fight Game Engine](./BossFightGame)
+A modular, console-based turn-based combat simulation.
+- **Key Concepts:** Pass-by-reference (`int &`), dynamic game loops, state validation, and memory optimization.
+- **Status:** Complete & Fully Documented.
+
+### 2. [🔐 Simple Text Encryptor](./Encryption)
+A lightweight cryptography application with random noise injection.
+- **Key Concepts:** Associative arrays (`std::map`), string tokenization (`isdigit`), and dynamic type conversion (`stoi`).
+- **Status:** Complete & Fully Documented.
 
 ---
-
-## 🛠️ Roadmap / What's Next
-* [x] Basic Syntax & Loops (`while`, `if-else`)
-* [x] Functions and `void` type
-* [x] Pass-by-reference (`&`)
-* [ ] Pointers and Memory Management
-* [ ] Object-Oriented Programming (OOP)
+*Maintained as part of my ongoing university studies and independent GameDev track.*
