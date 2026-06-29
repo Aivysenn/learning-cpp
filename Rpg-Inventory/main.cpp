@@ -8,19 +8,19 @@
 using namespace std;
 
 int main() {
-    // Начальные характеристики игрока
+    // Initial player stats
     int hp = 50;
     int maxHp = 100;
     int attack = 10;
 
-    // --- 1. Словари для предметов ---
-    // Инвентарь: название предмета -> количество
+    // --- 1. Item Maps ---
+    // Inventory: item name -> quantity
     map<string, int> inventory;
-    inventory["potion"] = 2;   // зелье лечения
-    inventory["apple"] = 1;    // яблоко
-    inventory["sword"] = 0;    // меч (пока нет)
+    inventory["potion"] = 2;   // healing potion
+    inventory["apple"] = 1;    // apple
+    inventory["sword"] = 0;    // sword (not acquired yet)
 
-    // Эффекты предметов: название -> сколько добавляет к характеристикам
+    // Item effects: item name -> stat increase amount
     map<string, int> healEffects;
     healEffects["potion"] = 40;
     healEffects["apple"] = 10;
@@ -36,18 +36,18 @@ int main() {
         cout << "> ";
         getline(cin, input);
 
-        // Разделяем ввод на команду и аргумент (например, "use" и "potion")
+        // Split input into command and argument (e.g., "use" and "potion")
         stringstream ss(input);
         string command, item;
         ss >> command >> item;
 
-        // Выход из игры
+        // Exit the game
         if (command == "exit") {
             cout << "Goodbye, adventurer!\n";
             break;
         }
 
-        // --- 2. Команда STATUS ---
+        // --- 2. STATUS Command ---
         else if (command == "status") {
             cout << "\n=== PLAYER STATUS ===\n";
             cout << "HP: " << hp << "/" << maxHp << "\n";
@@ -67,14 +67,14 @@ int main() {
             cout << "=====================\n\n";
         }
 
-        // --- 3. Команда PICK (подобрать предмет) ---
+        // --- 3. PICK Command (pick up an item) ---
         else if (command == "pick") {
             if (item.empty()) {
                 cout << "Error: What do you want to pick up? (e.g., 'pick sword')\n";
                 continue;
             }
 
-            // Проверяем, существует ли вообще такой предмет в игре
+            // Check if the item exists in the game data
             if (inventory.count(item)) {
                 inventory[item]++;
                 cout << "You picked up a " << item << "!\n";
@@ -83,33 +83,33 @@ int main() {
             }
         }
 
-        // --- 4. Команда USE (использовать предмет) ---
+        // --- 4. USE Command (use an item) ---
         else if (command == "use") {
             if (item.empty()) {
                 cout << "Error: What do you want to use? (e.g., 'use potion')\n";
                 continue;
             }
 
-            // Проверяем, есть ли предмет в инвентаре
+            // Check if the item is in the inventory
             if (!inventory.count(item) || inventory[item] <= 0) {
                 cout << "Error: You don't have '" << item << "' in your inventory.\n";
                 continue;
             }
 
-            // Логика для ХИЛЯЩИХ предметов
+            // Logic for HEALING items
             if (healEffects.count(item)) {
                 if (hp >= maxHp) {
                     cout << "Your health is already full!\n";
                 } else {
                     hp = min(maxHp, hp + healEffects[item]);
-                    inventory[item]--; // Тратим предмет
+                    inventory[item]--; // Consume the item
                     cout << "You used " << item << ". Healed for " << healEffects[item] << " HP.\n";
                 }
             }
-            // Логика для ОРУЖИЯ
+            // Logic for WEAPONS
             else if (attackEffects.count(item)) {
                 attack += attackEffects[item];
-                inventory[item]--; // Экипировали (убираем из сумки)
+                inventory[item]--; // Equipped (remove from backpack)
                 cout << "You equipped " << item << "! Attack increased by " << attackEffects[item] << ".\n";
             } 
             else {
@@ -117,7 +117,7 @@ int main() {
             }
         }
 
-        // Если команда неизвестна
+        // If command is invalid
         else {
             cout << "Error: Unknown command. Use 'status', 'pick', 'use', or 'exit'.\n";
         }
