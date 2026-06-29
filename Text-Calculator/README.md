@@ -1,26 +1,26 @@
-# How the Cipher Works
+# How the Text Calculator Works
 
-This is a custom cryptographic algorithm based on a substitution cipher with dynamic noise injection. It operates in two main phases:
+This is a simple text-based mathematical interpreter that parses equations written in plain English words. It operates in two main phases:
 
-### 1. Encryption Phase
+### 1. Lexical Mapping Phase
 
-- **Character Mapping:** The program takes each letter of the input text and replaces it with a unique pre-defined number using a `std::map` (e.g., `'a'` becomes `309`, `'b'` becomes `103`).
-- **Noise Injection:** To make the encrypted text harder to crack, the algorithm automatically generates and inserts a random special symbol (chosen from `;!@#$%^&*`) immediately after each number.
-- **Punctuation & Spaces:** All spaces and standard punctuation marks are left untouched to preserve the original sentence structure.
+- **Word-to-Number Translation:** The program takes textual inputs (`"zero"` through `"ten"`) and converts them into standard integers using a `std::map`.
+- **Operator Mapping:** Keywords like `"plus"` and `"minus"` are identified and translated into logical mathematical characters (`'+'` and `'-'`).
+- **Dynamic Tokenization:** Using `std::stringstream`, the program breaks down a raw input string sequential buffer into separate, clean words.
 
 **Example:**
 
-- **Input:** `hi`
-- **Process:** `'h'` —> `32` + random symbol (e.g., `#`), `'i'` —> `401` + random symbol (e.g., `^`)
-- **Output:** `32#401^`
+- **Input:** `five plus three minus two`
+- **Process:** `five` —> `5`, `plus` —> `+`, `three` —> `3`, `minus` —> `-`, `two` —> `2`
+- **Output:** `Math result: 6`
 
 —
 
-### 2. Decryption Phase
+### 2. Execution & Reverse Lookup Phase
 
-- **Tokenization:** The program reads the encrypted string and reconstructs the multi-digit numbers by checking if a character `isdigit`.
-- **Noise Filtering:** It identifies the random special symbols and safely ignores them, treating them as simple data separators.
-- **Reverse Lookup:** Using a reversed map (`std::map<int, char>`), the program converts the numbers back into their original characters and outputs the decrypted message.
+- **Arithmetic Processing:** The system iterates through the extracted words, caching the last seen operation and applying it immediately to the next parsed integer.
+- **Bi-directional Output:** Once the integer result is calculated, the program uses a reversed lookup map (`std::map<int, string>`) to translate the answer back into readable English text.
+- **Error Handling:** If an unrecognized word or symbol enters the stream, the loop breaks instantly with a safe exception error message.
 
 —
 
