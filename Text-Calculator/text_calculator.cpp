@@ -7,7 +7,6 @@
 using namespace std;
 
 int main() {
-    // --- 1. Maps to convert words into numbers and operations ---
     map<string, int> numbers;
     numbers["zero"] = 0;
     numbers["one"] = 1;
@@ -25,7 +24,6 @@ int main() {
     operations["plus"] = '+';
     operations["minus"] = '-';
 
-    // --- 2. Reverse map to output the result in words (from 0 to 20) ---
     map<int, string> textNumbers;
     textNumbers[0] = "zero";   textNumbers[1] = "one";     textNumbers[2] = "two";
     textNumbers[3] = "three";  textNumbers[4] = "four";    textNumbers[5] = "five";
@@ -35,12 +33,10 @@ int main() {
     textNumbers[15] = "fifteen"; textNumbers[16] = "sixteen"; textNumbers[17] = "seventeen";
     textNumbers[18] = "eighteen"; textNumbers[19] = "nineteen"; textNumbers[20] = "twenty";
 
-    // --- 3. Input text expression ---
     string input;
     cout << "Enter expression (e.g., 'five plus three minus two'):\n";
     getline(cin, input);
 
-    // Split the string into individual words using stringstream
     stringstream ss(input);
     string word;
     
@@ -48,12 +44,10 @@ int main() {
     char currentOp = '+'; // By default, we add the first number to zero
     bool hasError = false;
 
-    // --- 4. Parsing and calculation ---
     while (ss >> word) {
         if (numbers.count(word)) {
             int currentNum = numbers[word];
             
-            // Execute the previously stored operation
             if (currentOp == '+') {
                 result += currentNum;
             } else if (currentOp == '-') {
@@ -70,11 +64,10 @@ int main() {
         }
     }
 
-    // --- 5. Output the result ---
     if (!hasError) {
         cout << "\nMath result: " << result << "\n";
 
-        // Try to translate the result back into a word
+        
         if (textNumbers.count(result)) {
             cout << "In words: " << textNumbers[result] << "\n";
         } else if (result < 0) {
